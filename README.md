@@ -14,4 +14,21 @@
 |  |
 | ------- |
 | [0127-word-ladder](https://github.com/cchiragjain/dsa-solutions/tree/master/0127-word-ladder) |
+| [0130-surrounded-regions](https://github.com/cchiragjain/dsa-solutions/tree/master/0130-surrounded-regions) |
+## Array
+|  |
+| ------- |
+| [0130-surrounded-regions](https://github.com/cchiragjain/dsa-solutions/tree/master/0130-surrounded-regions) |
+## Depth-First Search
+|  |
+| ------- |
+| [0130-surrounded-regions](https://github.com/cchiragjain/dsa-solutions/tree/master/0130-surrounded-regions) |
+## Union Find
+|  |
+| ------- |
+| [0130-surrounded-regions](https://github.com/cchiragjain/dsa-solutions/tree/master/0130-surrounded-regions) |
+## Matrix
+|  |
+| ------- |
+| [0130-surrounded-regions](https://github.com/cchiragjain/dsa-solutions/tree/master/0130-surrounded-regions) |
 <!---LeetCode Topics End-->
