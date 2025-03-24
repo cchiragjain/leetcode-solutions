@@ -11,7 +11,8 @@ public:
         }
 
         for(int i = 0; i < n; i++) distance[i][i] = 0; // distance from i -> i
-        // floyd warshall
+        
+        // floyd warshall algorithm
         for(int k = 0; k < n; k++){
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
@@ -28,9 +29,10 @@ public:
             for(int adjCity = 0; adjCity < n; adjCity++){
                 if(distance[city][adjCity] <= distanceThreshold) cityCount++;
             }
+            // if found any city which is less than max amount of cities found till now then that is answer
             if(cityCount <= maxCityCount){
                 maxCityCount = cityCount;
-                cityNumber = city; // this is the city with the 
+                cityNumber = city; 
             }
         }
 
