@@ -6,7 +6,7 @@
 class DisjointSet{
 public:
     vector<int> parent;
-    // vector<unsigned long long> size;
+    // vector<unsigned long long> size; // doing by size is way outside contraints
     vector<int> rank;
 
     DisjointSet(int n){
@@ -61,6 +61,10 @@ public:
         for(int i = 0; i < n; i++) {
             // if any node is there own parent then they form a component
             if(ds.parent[i] == i) numberOfComponents++;
+        }
+
+        for(int i = 0; i < n; i++){
+            cout << ds.rank[i] << " ";
         }
 
         return numberOfComponents - 1;
