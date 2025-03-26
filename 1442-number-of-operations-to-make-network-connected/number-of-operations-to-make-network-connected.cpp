@@ -7,10 +7,12 @@ class DisjointSet{
 public:
     vector<int> parent;
     vector<unsigned long long> size;
+    vector<int> rank;
 
     DisjointSet(int n){
         parent.resize(n + 1);
-        size.resize(n + 1, 1);
+        rank.resize(n + 1, 0);
+        // size.resize(n + 1, 1);
         for(int i = 0; i <= n; i++){
             parent[i] = i;
         }
@@ -22,17 +24,18 @@ public:
         return parent[node];
     }
 
-    void unionBySize(int u, int v){
+    void unionByRank(int u, int v){
         int upu = findUltimateParent(u);
         int upv = findUltimateParent(v);
 
-        // always connect smaller size to bigger one
-        if(size[upu] < size[upv]){
+        // always connect smaller rank to bigger one
+        if(rank[upu] < rank[upv]){
             parent[upu] = upv;
-            size[upv] += size[upu];
-        } else {
+        } else if(rank[upv] < rank[upu]){
             parent[upv] = upu;
-            size[upu] += size[upv];
+        } else{
+            parent[upu] = upv;
+            rank[upv]++;
         }
     }
 };
@@ -52,7 +55,7 @@ public:
         for(auto connection: connections){
             int u = connection[0];
             int v = connection[1];
-            ds.unionBySize(u, v);
+            ds.unionByRank(u, v);
         }
 
         for(int i = 0; i < n; i++) {
