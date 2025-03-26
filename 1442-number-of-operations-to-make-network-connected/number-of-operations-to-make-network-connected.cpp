@@ -6,7 +6,7 @@
 class DisjointSet{
 public:
     vector<int> parent;
-    vector<unsigned long long> size;
+    // vector<unsigned long long> size;
     vector<int> rank;
 
     DisjointSet(int n){
