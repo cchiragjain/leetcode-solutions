@@ -24,6 +24,7 @@ public:
     void unionBySize(int u, int v){
         int pu = findParent(u);
         int pv = findParent(v);
+        if(pu == pv) return;
         
         if(size[pu] < size[pv]){
             parent[pu] = pv;
@@ -58,7 +59,7 @@ public:
         }
 
         int numberOfConnectedComponents = seen.size();
-        
+
         return n - numberOfConnectedComponents;
     }
 };
