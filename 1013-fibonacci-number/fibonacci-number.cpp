@@ -30,11 +30,27 @@ private:
         return dp[n];
     }
     
+    int solveUsingTabulationSpaceOptimised(int n){
+        if(n <= 1) return n;
+
+        int prev = 0;
+        int curr = 1;
+        int ans;
+
+        for(int i = 2; i <= n; i++){
+            ans = prev + curr;
+            prev = curr;
+            curr = ans;
+        }
+
+        return ans;
+    }
+
 public:
     int fib(int n) {
         // vector<int> dp(n + 1, -1); // need to return the nth fib number
         
         // int result = solveUsingMem(n, dp);
-        return solveUsingTabulation(n);    
+        return solveUsingTabulationSpaceOptimised(n);    
     }
 };
