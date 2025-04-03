@@ -34,7 +34,6 @@ private:
         int n = nums.size();
         vector<int> dp(n, -1);
         
-        int maxAmount = INT_MIN;
         dp[0] = nums[0];
         
         if(n > 1)
@@ -46,11 +45,28 @@ private:
             dp[i] = max(pick, notPick);
         }
 
-        for(int num: dp){
-            maxAmount = max(num, maxAmount);
+        return dp[n - 1];
+    }
+
+    int robSpaceOptimised(vector<int>& nums){
+        int n = nums.size();
+
+        int prev = nums[0];
+        int curr = nums[0];
+
+        if(n > 1)
+            curr = max(nums[0], nums[1]);
+
+        for(int i = 2; i < n; i++){
+            int pick = nums[i] + prev;
+            int notPick = 0 + curr;
+
+            int curri = max(pick, notPick);
+            prev = curr;
+            curr = curri;
         }
 
-        return maxAmount;
+        return curr;
     }
 
 public:
@@ -59,7 +75,7 @@ public:
         vector<int> dp(n + 1, -1);
         // return rob(nums, n - 1);
         // return robMemo(nums, dp, n - 1);
-        return robTab(nums);
+        return robSpaceOptimised(nums);
     }
 };
 
