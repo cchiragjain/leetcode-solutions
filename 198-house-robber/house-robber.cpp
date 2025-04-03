@@ -30,11 +30,47 @@ private:
         return dp[i] = max(pick, notPick);
     }
 
+    int robTab(vector<int>& nums){
+        int n = nums.size();
+        vector<int> dp(n, -1);
+        
+        int maxAmount = INT_MIN;
+        dp[0] = nums[0];
+        
+        if(n > 1)
+            dp[1] = max(nums[0], nums[1]);
+
+        for(int i = 2; i < n; i++){
+            int pick = nums[i] + dp[i - 2];
+            int notPick = 0 + dp[i - 1];
+            dp[i] = max(pick, notPick);
+        }
+
+        for(int num: dp){
+            maxAmount = max(num, maxAmount);
+        }
+
+        return maxAmount;
+    }
+
 public:
     int rob(vector<int>& nums) {
         int n = nums.size();
         vector<int> dp(n + 1, -1);
         // return rob(nums, n - 1);
-        return robMemo(nums, dp, n - 1);
+        // return robMemo(nums, dp, n - 1);
+        return robTab(nums);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
