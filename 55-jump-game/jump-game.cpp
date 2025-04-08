@@ -39,15 +39,12 @@ private:
                 if(newPosition < n && dp[newPosition] == 1){
                     dp[i] = 1;
                     canReach = true;
+                    // if was able to reach through any then dont need to check for others
                     break;
                 }
             }
             // will only reach here if the loop did not break then was not able to find any position
             if(canReach == false) dp[i] = 0;
-        }
-
-        for(int num: dp){
-            cout << num << " ";
         }
 
         return dp[0] == 1;
@@ -63,6 +60,16 @@ public:
         // vector<int> memo(n, -1);
 
         // return canJump(nums, currentStep, n, memo);
-        return canJumpTabulation(nums, n);
+        // return canJumpTabulation(nums, n);
+
+        // if we see the dp tabulation only need the last position where we can reach
+        int lastPos = n - 1; // position of last good index from where we can reach end
+        for(int currentPos = n - 2; currentPos >= 0; currentPos--){
+            if(nums[currentPos] + currentPos >= lastPos) {
+                lastPos = currentPos; // we can reach this
+            }
+        }
+
+        return lastPos == 0;
     }
 };
