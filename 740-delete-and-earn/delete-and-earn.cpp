@@ -15,6 +15,14 @@ private:
 
         return memo[num];
     }
+
+    int maxPointsTabulation(vector<int>& nums){
+        // find max number
+        // then from 2 to max number create dp array using recurrence realtion new dp[max number + 1]
+        // return dp[max number]
+        // can be further optimisd to 2 variables like in fibonacci/ house robber
+        return 0;
+    }
 public:
     int deleteAndEarn(vector<int>& nums) {
         unordered_map<int, int> memo;
@@ -25,7 +33,7 @@ public:
         // so rather than count we are keeping count * element
         for(int num: nums){
             points[num] += num;
-            // we dont want to sort the array increases complexity so our function will basically return maxPoints(4) which will consider 
+            // we dont want to sort the array increases complexity so our function will basically return maxPoints(4) which will consider whether to take 4 or not which will go to 3 and 2
             maxNumber = max(maxNumber, num); 
         }
 
