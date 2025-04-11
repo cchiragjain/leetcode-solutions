@@ -7,10 +7,8 @@ private:
         int costOne = minCost(cost, i - 1, memo);
         int costTwo = minCost(cost, i - 2, memo);
         
-        memo[i - 1] = costOne;
-        memo[i - 2] = costTwo;
-
-        return cost[i] + min(costOne, costTwo);
+        memo[i] = cost[i] + min(costOne, costTwo);
+        return memo[i];
     }
     
 public:
