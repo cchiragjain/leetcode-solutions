@@ -15,6 +15,7 @@ private:
                 minFallingPathSum(i + 1, j + 1,n, matrix, memo)
             )
         );
+
         return memo[i][j];
     }
 
@@ -33,25 +34,40 @@ public:
         // }
 
         // tabulation
-        vector<vector<int>> dp(n, vector<int>(n, INT_MAX));
-        for(int i = 0; i < n; i++){
-            dp[0][i] = matrix[0][i];
-        }
+        // vector<vector<int>> dp(n, vector<int>(n, INT_MAX));
+        // for(int i = 0; i < n; i++){
+        //     dp[0][i] = matrix[0][i];
+        // }
 
+        // for(int i = 1; i < n; i++){
+        //     for(int j = 0; j < n; j++){
+        //         int topLeftValue = j > 0 ? dp[i - 1][j - 1] : INT_MAX;
+        //         int topValue = dp[i - 1][j];
+        //         int topRightValue = j + 1 != n ? dp[i - 1][j + 1] : INT_MAX;
+
+        //         dp[i][j] = matrix[i][j] + min(topLeftValue, min(topValue, topRightValue));
+        //     }
+        // }
+
+        // for(int j = 0; j < n; j++){
+        //     minSum = min(minSum, dp[n - 1][j]);
+        // }
+
+        vector<int> prev(matrix[0]);
         for(int i = 1; i < n; i++){
+            vector<int> curr(n, INT_MAX);
             for(int j = 0; j < n; j++){
-                int topLeftValue = j > 0 ? dp[i - 1][j - 1] : INT_MAX;
-                int topValue = dp[i - 1][j];
-                int topRightValue = j + 1 != n ? dp[i - 1][j + 1] : INT_MAX;
+                int topLeftValue = j > 0 ? prev[j - 1] : INT_MAX;
+                int topValue = prev[j];
+                int topRightValue = j + 1 != n ? prev[j + 1] : INT_MAX;        
+                curr[j] = matrix[i][j] + min(topLeftValue, min(topValue, topRightValue));
 
-                dp[i][j] = matrix[i][j] + min(topLeftValue, min(topValue, topRightValue));
             }
+            prev = curr;
         }
-
         for(int j = 0; j < n; j++){
-            minSum = min(minSum, dp[n - 1][j]);
+            minSum = min(minSum, prev[j]);
         }
-
         return minSum;
     }
 };
