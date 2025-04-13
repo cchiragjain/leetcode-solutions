@@ -20,8 +20,29 @@ private:
 
 public:
     int longestCommonSubsequence(string s1, string s2) {
-        vector<vector<int>> memo(s1.length(), vector<int>(s2.length(), -1));
+        // Recursion + memoisation
+        // vector<vector<int>> memo(s1.length(), vector<int>(s2.length(), -1));
+        // t.c => O(2^(m + n)) for recursion
+        // T.C => O(M * N with memo)
+        // return solve(s1, s2, 0, 0, memo);
 
-        return solve(s1, s2, 0, 0, memo);
+        int m = s1.length();
+        int n = s2.length();
+
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+        // stores dp[i][j] stores lcs for string length i(s1), and j(s2) 
+        // ex. for dp[2][3] will store lcs for ab and ace which will be 1
+
+        for(int i = 1; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                if(s1[i - 1] == s2[j - 1]){
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return dp[m][n];
     }
 };
