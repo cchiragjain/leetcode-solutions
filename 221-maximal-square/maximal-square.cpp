@@ -20,14 +20,37 @@ public:
     int maximalSquare(vector<vector<char>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-        vector<vector<int>> memo(m, vector<int>(n, -1));
+        // vector<vector<int>> memo(m, vector<int>(n, -1));
 
+        // int maxSides = 0;
+
+        // for(int i = 0; i < m; i++){
+        //     for(int j = 0; j < n; j++){
+        //         if(matrix[i][j] == '1'){
+        //             maxSides = max(maximumSideLength(i, j, m,n, matrix, memo), maxSides);
+        //         }
+        //     }
+        // }
+
+        // return maxSides * maxSides;
+
+        vector<vector<int>> dp(m, vector<int>(n, 0));
         int maxSides = 0;
 
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                if(matrix[i][j] == '1'){
-                    maxSides = max(maximumSideLength(i, j, m,n, matrix, memo), maxSides);
+                if(matrix[i][j] == '1') dp[i][j] = 1;
+            }
+        }
+
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(dp[i][j] == 1){
+                    int left = j > 0 ? dp[i][j - 1] : 0;
+                    int diagonal = i > 0 && j > 0 ? dp[i - 1][j - 1] : 0;
+                    int top = i > 0 ? dp[i - 1][j] : 0;
+                    dp[i][j] = 1 + min(left, min(diagonal, top));
+                    maxSides = max(maxSides, dp[i][j]);
                 }
             }
         }
