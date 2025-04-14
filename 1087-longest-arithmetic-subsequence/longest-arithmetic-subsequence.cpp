@@ -22,7 +22,7 @@ public:
 
         int result = 0;
         // d can at max be 500
-        // if we want to avoid negative we are adding a constant 501 to our result everytime
+        // if we want to avoid negative d we are adding a constant 501 to our result everytime
         vector<vector<int>> memo(n, vector<int>(1003, -1));
 
         for(int i = 0; i < n; i++){
