@@ -11,8 +11,11 @@ public:
                 if(nums[j] < nums[i]){
                     // if such length subsequence was already found
                     if(dp[j] + 1 == dp[i]){
+                        // found another path to reach i
+                        // At index 4 (nums[4] = 7), you can reach it from both index 2 and 3 (both give LIS of length 3), so count[4] = count[2] + count[3] = 1 + 1 = 2.
                         count[i] += count[j];
                     } else if(dp[j] + 1 > dp[i]){
+                        // found new longest 
                         dp[i] = dp[j] + 1;
                         count[i] = count[j];
                     }
@@ -21,7 +24,8 @@ public:
         }
 
         int result = 0;
-        int maxVal = INT_MIN;
+        int maxVal = 1;
+
         for(int num: dp) maxVal = max(maxVal, num);
 
         for(int i = 0; i < n; i++){
