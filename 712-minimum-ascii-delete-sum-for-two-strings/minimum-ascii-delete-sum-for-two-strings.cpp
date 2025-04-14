@@ -47,6 +47,9 @@ public:
                     // no delete operation is required
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
+                    // ex. if say at s vs ea
+                    // then we can either take s and then "" vs ea
+                    // or take a and then s vs e whichever is minimum
                     dp[i][j] = min(
                         s1[i - 1] + dp[i - 1][j],
                         s2[j - 1] + dp[i][j - 1]
