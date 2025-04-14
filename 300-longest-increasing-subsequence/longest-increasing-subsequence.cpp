@@ -24,8 +24,25 @@ private:
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>> memo(n, vector<int>(n, -1));
 
-        return solve(0, -1, n, nums, memo);
+        // memoisation T.C => O(2^n) to O(n^2)
+        // vector<vector<int>> memo(n, vector<int>(n, -1));
+
+        // return solve(0, -1, n, nums, memo);
+
+        vector<int> dp(n, 1); // dp[i] defines length of increasing subsequence ending at index i. by default each is a subsequence of its own so all have 1 length
+        int maxLength = 1;
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < i; j++){
+                // if can be part of subsequence then check whether if including i in the subsequence of j increases our length or not
+                if(nums[j] < nums[i]){
+                    dp[i] = max(dp[i], dp[j] + 1); // if we include i in the subsequence of j or keep it as it is
+                    maxLength = max(dp[i], maxLength);
+                }
+            }
+        }
+
+        return maxLength;
     }
 };
