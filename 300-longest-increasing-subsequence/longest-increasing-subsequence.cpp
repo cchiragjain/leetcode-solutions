@@ -30,19 +30,38 @@ public:
 
         // return solve(0, -1, n, nums, memo);
 
-        vector<int> dp(n, 1); // dp[i] defines length of increasing subsequence ending at index i. by default each is a subsequence of its own so all have 1 length
-        int maxLength = 1;
+        // T.c O(N^ 2) s.C O(N)
+        // tabulation
+        // vector<int> dp(n, 1); // dp[i] defines length of increasing subsequence ending at index i. by default each is a subsequence of its own so all have 1 length
+        // int maxLength = 1;
+
+        // for(int i = 0; i < n; i++){
+        //     for(int j = 0; j < i; j++){
+        //         // if can be part of subsequence then check whether if including i in the subsequence of j increases our length or not
+        //         if(nums[j] < nums[i]){
+        //             dp[i] = max(dp[i], dp[j] + 1); // if we include i in the subsequence of j or keep it as it is
+        //             maxLength = max(dp[i], maxLength);
+        //         }
+        //     }
+        // }
+
+        // return maxLength;
+
+        // using patience sorting
+        vector<int> sorted;
 
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < i; j++){
-                // if can be part of subsequence then check whether if including i in the subsequence of j increases our length or not
-                if(nums[j] < nums[i]){
-                    dp[i] = max(dp[i], dp[j] + 1); // if we include i in the subsequence of j or keep it as it is
-                    maxLength = max(dp[i], maxLength);
-                }
+            auto it = lower_bound(sorted.begin(), sorted.end(), nums[i]); // find element just greater or equal to nums[i];
+
+            if(it == sorted.end()){
+                // if not found push it to sorted array this is greater and can be part of our lis
+                sorted.push_back(nums[i]);
+            } else {
+                // replace this value with nums[i] this will be part of our lis now
+                *it = nums[i];
             }
         }
 
-        return maxLength;
+        return sorted.size();
     }
 };
