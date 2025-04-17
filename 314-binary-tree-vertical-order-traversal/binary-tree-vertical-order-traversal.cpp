@@ -23,7 +23,7 @@ public:
         // we want to store on the basis of cols to be based on col so storing on that basis
         // store col vs row vs all nodes at that [col, row]
         // in gfg we even need to sort in case of clash but in this we only want to store left to right so vector can be used
-        
+
         map<int, map<int, vector<int>>> allNodes;
         queue<pair<TreeNode*, pair<int, int>>> q; // stores node vs row vs col
 
@@ -60,9 +60,10 @@ public:
             }
         }
 
-        for(auto [col, rowVsNodes]: allNodes){
+        // important how to iterate
+        for(auto& [col, rowVsNodes]: allNodes){
             vector<int> cols;
-            for(auto [row, nodes]: rowVsNodes){
+            for(auto& [row, nodes]: rowVsNodes){
                 cols.insert(cols.end(), nodes.begin(), nodes.end());
             }
             result.push_back(cols);
