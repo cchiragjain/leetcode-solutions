@@ -27,20 +27,31 @@ private:
     }
 public:
     Node* lowestCommonAncestor(Node* p, Node * q) {
-        vector<Node*> pPath;
-        vector<Node*> qPath;
+        // this appraoch is exactly similar to finding intersection point of linked list
+        Node* a = p;
+        Node* b = q;
 
-        findPath(p, pPath);
-        findPath(q, qPath);
-
-        int i = pPath.size() - 1;
-        int j = qPath.size() - 1;
-
-        while(i >= 0 && j >= 0 && pPath[i] == qPath[j]){
-            i--;
-            j--;
+        while(a != b){
+            a = a == nullptr ? q : a -> parent;
+            b = b == nullptr ? p : b -> parent;
         }
+        return a;
 
-        return pPath[i + 1];
+        // this takes O(N) time and O(N) space
+        // vector<Node*> pPath;
+        // vector<Node*> qPath;
+
+        // findPath(p, pPath);
+        // findPath(q, qPath);
+
+        // int i = pPath.size() - 1;
+        // int j = qPath.size() - 1;
+
+        // while(i >= 0 && j >= 0 && pPath[i] == qPath[j]){
+        //     i--;
+        //     j--;
+        // }
+
+        // return pPath[i + 1];
     }
 };
