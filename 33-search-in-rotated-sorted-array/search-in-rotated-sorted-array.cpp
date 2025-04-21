@@ -20,7 +20,7 @@ public:
             // ex. array will be [4, 5, 6, 7, 0, 1, 2]
             else if(nums[start] <= nums[mid]){
                 // target can lie in this range
-                if(nums[start] <= target && nums[mid] >= target){
+                if(nums[start] <= target && target < nums[mid]){
                     end = mid - 1;
                 } else {
                     start = mid + 1;
@@ -28,7 +28,7 @@ public:
             } 
             // sorted in right direction
             else if(nums[start] >= nums[mid]){
-                if(nums[end] >= target && nums[mid] <= target){
+                if(nums[mid] < target && target <= nums[end]){
                     start = mid + 1;
                 } else{
                     end = mid - 1;
