@@ -8,27 +8,22 @@ private:
 public:
     int maxVowels(string s, int k) {
         int n = s.length();
-        // can use fixed sliding window of size k to solve this
-        int maxCount = 0;
+        int maxCount;
         int vowelCount = 0;
 
         for(int i = 0; i < k; i++){
-            if(isVowel(s[i])){
-                vowelCount++;
-            }
-        }
-        
-        maxCount = vowelCount;
-
-        for(int i = k; i < n; i++){
-            if(isVowel(s[i - k])) vowelCount--;
             if(isVowel(s[i])) vowelCount++;
-        
-            maxCount = max(vowelCount, maxCount);
+        }
+
+        maxCount = vowelCount;
+        for(int i = k; i < n; i++){
+            if(isVowel(s[i])) vowelCount++;
+            if(isVowel(s[i - k])) vowelCount--;
+
+            maxCount = max(maxCount, vowelCount);
         }
 
         return maxCount;
-
 
         // O(N * K) approach gives tle
         // for each substring of size k count vowels
