@@ -11,11 +11,14 @@ public:
         for(int right = 0; right < n; right++){
             product *= nums[right];
 
+            // jab tak sahi window tak nahi pahuchte in which then keep on removing
             while(product >= k){
                 product = product / nums[left];
                 left++;
             }
 
+            // all subarrays from left, right are valid now
+            // this returns count of all subarrays from right to left
             count += (right - left + 1);
         }
 
